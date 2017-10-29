@@ -5,7 +5,7 @@ for(i = 0; i<numberOfRows; i++ ){
     let row = [];    //row for game board
 
     for(j=0; j< numberOfColumns; j++){
-      row.push(null);
+      row.push('  ');
     }
     board.push(row);   //adds newly formed row to game board
   }
@@ -13,13 +13,13 @@ for(i = 0; i<numberOfRows; i++ ){
 };
 
 const generateBombBoard = (numberOfRows, numberOfColumns, numberOfBombs) =>{
-  let board = [];    //will represent the game board
+  board = [];    //will represent the game board
 
 for(i = 0; i<numberOfRows; i++ ){
-    let row = [];    //row for game board
+     row = [];    //row for game board
 
     for(j=0; j< numberOfColumns; j++){
-      row.push(' ');
+      row.push('  ');
     }
     board.push(row);   //adds newly formed row to game board
   }
@@ -30,22 +30,27 @@ for(i = 0; i<numberOfRows; i++ ){
   while(numberOfBombsPlaced < numberOfBombs){
     //random number generator for row index
     let randomRowIndex = Math.floor(Math.random() * numberOfRows);
-    //random number generator fot the colums
+    //random number generator for the colums
     let randomColumnIndex = Math.floor(Math.random() * numberOfColumns);
     //place bomb at spot from random indices
-    board[randomRowIndex,randomColumnIndex] = 'B';
+    board[randomRowIndex][randomColumnIndex] = 'B';
     numberOfBombsPlaced++;
-    //important note: The code in this while loop has the potential to place 
+    //important note: The code in this while loop has the potential to place
     //bombs on top of already existing bombs.
   }
   return board;
 }
 
 const printBoard = (board) =>{
-  console.log('Current Board: ')
-  console.log(board[0].join('|'));  //turns index into single string
-  console.log(board[1].join('|'));  //connected by '|'
-  console.log(board[2].join('|'));
+  //joins individual rows as one and connects all rows
+  console.log(board.map(row => row.join('|')).join('\n'));
 };
 
-console.log(generatePlayerBoard(4,3));
+let playerBoard = generatePlayerBoard(3,4);
+let bombBoard = generateBombBoard(3,4,5);
+
+console.log('Player Board: ');
+printBoard(playerBoard);
+
+console.log('Bomb Board: ');
+printBoard(bombBoard);
