@@ -1,15 +1,22 @@
+const generatePlayerBoard = (numberOfRows, numberOfColumns) => {
+  let board = [];    //will represent the game board
+
+for(i = 0; i<numberOfRows; i++ ){
+    let row = [];    //row for game board
+
+    for(j=0; j< numberOfColumns; j++){
+      row.push(' ');
+    }
+    board.push(row);   //adds newly formed row to game board
+  }
+  return board;
+}
+
 const printBoard = (board) =>{
   console.log('Current Board: ')
   console.log(board[0].join('|'));  //turns index into single string
   console.log(board[1].join('|'));  //connected by '|'
   console.log(board[2].join('|'));
 };
-const board = [                     //grid for the game board
-  [' ', ' ', ' '],
-  [' ', ' ', ' '],
-  [' ', ' ', ' ']
-];
-printBoard(board);
-board[0][1] = '1';
-board[2][2] = 'B';
-printBoard(board);
+
+console.log(generatePlayerBoard(4,3));
