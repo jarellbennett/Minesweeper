@@ -6,11 +6,11 @@ class Game {
   playMove(rowIndex,columnIndex){
     this._board.flipTile(rowIndex,columnIndex);
     if(this._board.playerBoard[rowIndex][columnIndex] === 'B'){
-      Console.log('Game Over!');
+      console.log('Game Over!');
       this._board.print();
     }
-    else if(this.board.hasSafeTiles()){
-      Console.log('Winner!!');
+    else if(!this._board.hasSafeTiles()){
+      console.log('Winner!!');
     }
     else {
       console.log('Current Board: ');
@@ -24,8 +24,8 @@ class Board {
   constructor(numberOfRows,numberOfColumns,numberOfBombs){
     this._numberOfBombs = numberOfBombs;
     this._numberOfTiles = numberOfRows * numberOfColumns;
-    this._playerBoard = generatePlayerBoard(numberOfRows,numberOfColumns);
-    this._bombBoard = generateBombBoard(numberOfRows,numberOfColumns,
+    this._playerBoard = Board.generatePlayerBoard(numberOfRows,numberOfColumns);
+    this._bombBoard = Board.generateBombBoard(numberOfRows,numberOfColumns,
       numberOfBombs);
 
   }
@@ -64,7 +64,7 @@ class Board {
       if(neighborRowIndex >= 0 && neighborRowIndex < numberOfRows &&
         neighborColumnIndex >= 0 && neighborColumnIndex < numberOfColumns ){
           //cheks if bombs located at current index
-          if(bombBoard[neighborRowIndex][neighborColumnIndex] === 'B'){
+          if(this._bombBoard[neighborRowIndex][neighborColumnIndex] === 'B'){
               numberOfBombs++;
           }
         }
@@ -84,10 +84,10 @@ class Board {
   static generatePlayerBoard(numberOfRows, numberOfColumns) {
     let board = [];    //will represent the game board
 
-  for(i = 0; i<numberOfRows; i++ ){
+  for(let i = 0; i<numberOfRows; i++ ){
       let row = [];    //row for game board
 
-      for(j=0; j< numberOfColumns; j++){
+      for(let j=0; j< numberOfColumns; j++){
         row.push('  ');
       }
       board.push(row);   //adds newly formed row to game board
@@ -96,12 +96,12 @@ class Board {
   }
 
   static generateBombBoard(numberOfRows, numberOfColumns, numberOfBombs) {
-    board = [];    //will represent the game board
+    let board = [];    //will represent the game board
 
-  for(i = 0; i<numberOfRows; i++ ){
-       row = [];    //row for game board
+  for(let i = 0; i<numberOfRows; i++ ){
+       let row = [];    //row for game board
 
-      for(j=0; j< numberOfColumns; j++){
+      for(let j=0; j< numberOfColumns; j++){
         row.push('  ');
       }
       board.push(row);   //adds newly formed row to game board
